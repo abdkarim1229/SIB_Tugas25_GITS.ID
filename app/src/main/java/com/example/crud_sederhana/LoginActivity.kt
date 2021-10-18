@@ -7,7 +7,9 @@ import android.widget.Toast
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import com.example.crud_sederhana.model.GetNameResponse
+import com.example.crud_sederhana.model.IDResponse
 import com.example.crud_sederhana.model.LoginResponse
+import com.example.crud_sederhana.network.ApiEndPoint
 import com.example.crud_sederhana.network.ApiService
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
@@ -72,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+
 //                    tv_status.text = "Auth Login Success"
                     Toast.makeText(this@LoginActivity, "Auth Login Success", Toast.LENGTH_SHORT)
                         .show()
@@ -92,6 +94,18 @@ class LoginActivity : AppCompatActivity() {
 
         btn_finger.setOnClickListener {
             biometricPrompt.authenticate(promptInfo)
+            ApiService.endpoint.getID().enqueue(object: retrofit2.Callback<IDResponse>{
+                override fun onResponse(call: Call<IDResponse>, response: Response<IDResponse>) {
+                    if (response.body()!!.deviceID == "cfa36508fbb70f0c"){
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    }
+                }
+
+                override fun onFailure(call: Call<IDResponse>, t: Throwable) {
+                    Toast.makeText(this@LoginActivity, "${t}", Toast.LENGTH_SHORT).show()
+                }
+
+            })
         }
     }
 }

@@ -12,6 +12,9 @@ interface ApiEndPoint {
     @GET("users/2")
     fun getUsername(): Call<GetNameResponse>
 
+    @GET("users/{cfa36508fbb70f0c}")
+    fun getID(): Call<IDResponse>
+
     @FormUrlEncoded
     @POST("notebooks")
     fun insertNotes(
