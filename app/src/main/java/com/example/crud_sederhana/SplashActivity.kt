@@ -11,10 +11,10 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
         image.alpha = 0f
-        image.animate().setDuration(1500).alpha(1f).withEndAction {
+        image.animate().setDuration(2500).alpha(1f).withEndAction {
             val i = Intent(this, LoginActivity::class.java)
             startActivity(i)
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+//            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
 
