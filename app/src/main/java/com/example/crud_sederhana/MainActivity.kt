@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,6 +35,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             doLogut()
             Toast.makeText(this, "Logout Success", Toast.LENGTH_SHORT).show()
+        }
+
+        fab_timer.setOnClickListener {
+            startActivity(Intent(this, TimerActivity::class.java))
         }
 
         rv_notes.layoutManager = LinearLayoutManager(this)
